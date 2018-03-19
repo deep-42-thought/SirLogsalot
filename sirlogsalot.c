@@ -176,6 +176,12 @@ void set_nick(int sock, char nick[]){
     send(sock, nick_packet, strlen(nick_packet), 0);
 }
 
+void send_identify(int sock, char nick[], char pass[]){
+    char identify_packet[512];
+    sprintf(identify_packet, "PRIVMSG NickServ :IDENTIFY %s %s\r\n", nick, pass);
+    send(sock, identify_packet, strlen(identify_packet), 0);
+}
+
 void send_user_packet(int sock, char nick[]){
     char user_packet[512];
     sprintf(user_packet, "USER %s 0 * :%s\r\n", nick, nick);
@@ -224,13 +230,18 @@ int main() {
     }
     
     char *nick = get_config("nick");
+    char *main_nick = get_config("main_nick");
+    char *pass = get_config("pass");
     char *channels = get_config("channels");
 
     set_nick(socket_desc, nick);
     send_user_packet(socket_desc, nick);
+    send_identify(socket_desc, main_nick, pass);
     join_channel(socket_desc, channels);
 
     free(nick);
+    free(main_nick);
+    free(pass);
     free(channels);
 
     FILE *logfile = fopen("bot.log.txt", "a+");
