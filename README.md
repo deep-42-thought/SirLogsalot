@@ -18,4 +18,6 @@ The program can be configured by editing the config.txt file. The file is in the
 1. **server**: Used to set the server ip to connect to. Example: server = 195.154.200.232
 2. **port**: Used to set the port of the server. The default irc port is 6667. Example: port = 6667
 3. **nick**: Used to set the nick of the bot. Example: nick = SirLogsalot
-4. **channels**: Used to set the channel list for the bot, comma seperated. Example: channels = #WatchPeopleCode,#archlinux
+4. **main_nick**: Nick used to authenticate to NickServ. Example: main_nick = SirLogsalot
+5. **pass**: Password used to authenticate to NickServ. Example: pass = secret
+6. **channels**: Used to set the channel list for the bot, comma seperated. Example: channels = #WatchPeopleCode,#archlinux
